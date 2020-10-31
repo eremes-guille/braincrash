@@ -4,28 +4,14 @@ var express = require('express');
 
 var router = express.Router();
 
-var multer = require('multer');
-
-var path = require('path');
-
-var fs = require('fs');
-
 var Book = require('../models/book');
-
-var uploadPath = path.join('public', Book.coverImageBasePath);
-var imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
 
 var Author = require('../models/author');
 
 var _require = require('express'),
     query = _require.query;
 
-var upload = multer({
-  dest: uploadPath,
-  fileFilter: function fileFilter(req, file, callback) {
-    callback(null, imageMimeTypes.includes(file.mimetype));
-  }
-}); //All Book Route
+var imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif']; //All Book Route
 
 router.get('/', function _callee(req, res) {
   var query, books;
@@ -88,21 +74,20 @@ router.get('/new', function _callee2(req, res) {
   });
 }); //Create Book Route
 
-router.post('/', upload.single('cover'), function _callee3(req, res) {
-  var fileName, book, newBook;
+router.post('/', function _callee3(req, res) {
+  var book, newBook;
   return regeneratorRuntime.async(function _callee3$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
-          fileName = req.file != null ? req.file.filename : null;
           book = new Book({
             title: req.body.title,
             author: req.body.author,
             publishDate: new Date(req.body.publishDate),
             pageCount: req.body.pageCount,
-            coverImageName: fileName,
             description: req.body.description
           });
+          saveCover(book, req.body.cover);
           _context3.prev = 2;
           _context3.next = 5;
           return regeneratorRuntime.awrap(book.save());
@@ -111,32 +96,21 @@ router.post('/', upload.single('cover'), function _callee3(req, res) {
           newBook = _context3.sent;
           // res.redirect(`books/${newBook.id}`)
           res.redirect("books");
-          _context3.next = 13;
+          _context3.next = 12;
           break;
 
         case 9:
           _context3.prev = 9;
           _context3.t0 = _context3["catch"](2);
-
-          if (book.coverImageName != null) {
-            removeBookCover(book.coverImageName);
-          }
-
           renderNewPage(res, book, true);
 
-        case 13:
+        case 12:
         case "end":
           return _context3.stop();
       }
     }
   }, null, null, [[2, 9]]);
 });
-
-function removeBookCover(fileName) {
-  fs.unlink(path.join(uploadPath, fileName), function (err) {
-    if (err) console.error(err);
-  });
-}
 
 function renderNewPage(res, book) {
   var hasError,
@@ -174,6 +148,16 @@ function renderNewPage(res, book) {
       }
     }
   }, null, null, [[1, 10]]);
+}
+
+function saveCover(book, coverEncoded) {
+  if (coverEncoded == null) return;
+  var cover = JSON.parse(coverEncoded);
+
+  if (cover != null && imageMimeTypes.includes(cover.type)) {
+    book.coverImage = new Buffer.from(cover.data, 'base64');
+    book.coverImageType = cover.type;
+  }
 }
 
 module.exports = router;

@@ -2,9 +2,6 @@
 
 var mongoose = require('mongoose');
 
-var path = require('path');
-
-var coverImageBasePath = 'uploads/bookCovers';
 var bookSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -26,7 +23,11 @@ var bookSchema = new mongoose.Schema({
     required: true,
     "default": Date.now
   },
-  coverImageName: {
+  coverImage: {
+    type: Buffer,
+    required: true
+  },
+  coverImageType: {
     type: String,
     required: true
   },
@@ -37,9 +38,8 @@ var bookSchema = new mongoose.Schema({
   }
 });
 bookSchema.virtual('coverImagePath').get(function () {
-  if (this.coverImageName != null) {
-    return path.join('/', coverImageBasePath, this.coverImageName);
+  if (this.coverImage != null && this.coverImageType != null) {
+    return "data:".concat(this.coverImageType, ";charset=utf-8;base64,\n        ").concat(this.coverImage.toString('base64'));
   }
 });
 module.exports = mongoose.model('Book', bookSchema);
-module.exports.coverImageBasePath = coverImageBasePath;
