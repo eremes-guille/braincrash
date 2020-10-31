@@ -12,8 +12,8 @@ router.get('/', async (req, res) => {
     try {
         const authors = await Author.find(searchOptions)
         res.render('authors/index', { 
-        authors: authors, 
-        searchOptions: req.query })
+            authors: authors, 
+            searchOptions: req.query })
     } catch {
         res.redirect('/')
     }
@@ -32,6 +32,7 @@ router.post('/', async (req, res) => {
     })
     try {
         const newAuthor = await author.save()
+        // res.redirect(`authors/${newAuthor.id}`)
         res.redirect(`authors`)
     } catch {
         res.render('authors/new', {

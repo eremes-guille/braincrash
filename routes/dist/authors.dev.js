@@ -68,6 +68,7 @@ router.post('/', function _callee2(req, res) {
 
         case 4:
           newAuthor = _context2.sent;
+          // res.redirect(`authors/${newAuthor.id}`)
           res.redirect("authors");
           _context2.next = 11;
           break;
