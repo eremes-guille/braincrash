@@ -16,6 +16,8 @@ var indexRouter = require('./routes/index');
 
 var authorRouter = require('./routes/authors');
 
+var bookRouter = require('./routes/books');
+
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 app.set('layout', 'layouts/layout');
@@ -40,4 +42,5 @@ db.once('open', function () {
 });
 app.use('/', indexRouter);
 app.use('/authors', authorRouter);
+app.use('/books', bookRouter);
 app.listen(process.env.PORT || 3000);
