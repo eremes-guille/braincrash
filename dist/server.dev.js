@@ -12,6 +12,8 @@ var expressLayouts = require('express-ejs-layouts');
 
 var bodyParser = require('body-parser');
 
+var methodOverride = require('method-override');
+
 var indexRouter = require('./routes/index');
 
 var authorRouter = require('./routes/authors');
@@ -22,6 +24,7 @@ app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 app.set('layout', 'layouts/layout');
 app.use(expressLayouts);
+app.use(methodOverride('_method'));
 app.use(express["static"]('public'));
 app.use(bodyParser.urlencoded({
   limit: '50mb',
