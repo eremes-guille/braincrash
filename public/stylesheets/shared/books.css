@@ -1,14 +1,14 @@
 :root {
     --book-cover-width: 200px;
     --book-cover-width-large: 325px;
-    --book-cover-aspect-ratio: 0.75;
+    --book-cover-aspect-ratio: 0;
 }
 
 .book-cover {
     width: var(--book-cover-width);
     height: calc(var(--book-cover-width) / var(--book-cover-aspect-ratio));
-    border: 5px solid var(--color-text-light);
-    border-radius: 1rem;
+    border: 2px solid var(--color-text-light);
+    border-radius: 0.75rem;
 }
 
 .book-cover-large {

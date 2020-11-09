@@ -5,9 +5,10 @@
 @import 'shared/form.css';
 @import 'shared/author.css';
 @import 'shared/books.css';
+@import 'shared/article.css';
 
 :root {
-    font-family: 'Open Sans';
+    font-family: 'Roboto Slab';
     font-size: 20px;
     color: var(--color-text-light);
 }
@@ -17,7 +18,11 @@
 }
 
 body {
-    background: linear-gradient(to right, var(--color-background-dark), var(--color-background-light));
+    background-image: url('../img/bgparalayang.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .container {

@@ -1,0 +1,25 @@
+.section {
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+}
+
+.feature_1 {
+    background-image: url('/img/DSC_0074.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-bottom: 4rem;
+    margin-top: 4rem;
+}
+
+.feature_2 {
+    background-image: url('/img/DSC_0025.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-bottom: 4rem;
+    margin-top: 4rem;
+}

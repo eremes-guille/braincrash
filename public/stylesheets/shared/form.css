@@ -46,7 +46,7 @@
     color: var(--color-text-light);
     font-size: 1rem;
     font-weight: normal;
-    font-family: 'Open Sans';
+    font-family: 'Roboto Slab';
     outline: none;
 }
 
@@ -64,7 +64,7 @@
 }
 
 .filepond--root {
-    font-family: 'Open Sans';
+    font-family: 'Roboto Slab';
     margin-bottom: 0;
 }
 
