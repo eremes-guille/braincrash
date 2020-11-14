@@ -43,3 +43,33 @@ body {
 .error-message {
     color: hsl(var(--color-danger-hue), 100%, 50%);
 }
+
+@media only screen and (max-width: 600px) {
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+        align-items: center;
+        float: none;
+    }
+    .form-item {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+        align-items: center;
+        float: none;
+    }
+    .header-nav {
+        margin: 0 0 0 0;
+    }
+    .header-nav li a {
+        text-decoration: none;
+        padding: 5px;
+        text-align: center;
+        justify-content: center;
+    }
+    .book-details-label {
+        font-size: 1rem;
+        font-weight: 300;
+    }
+}
